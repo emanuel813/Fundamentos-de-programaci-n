@@ -1,0 +1,13 @@
+// Ejercicio 3
+void setup() {
+
+pinMode(8,OUTPUT); // azul
+digitalWrite(8, LOW);
+
+}
+
+void loop() {
+  digitalWrite(8,HIGH); // encendemos el azul
+  delay(2000); // esperamos 2 segundos
+  digitalWrite(8,LOW); // apagamos el azul
+}
