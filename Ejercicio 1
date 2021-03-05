@@ -1,0 +1,17 @@
+// Ejercicio 1  
+void setup() {
+pinMode(9,OUTPUT); // verde
+pinMode(7,OUTPUT); // rojo
+// El semaforo pasa mas tiempo en rojo que en verde 
+digitalWrite(9, LOW);
+digitalWrite(7, LOW);
+}
+
+void loop() {
+  digitalWrite(7, HIGH);// encendemos el rojo
+  delay(4000); // esperamos 4 segundos
+  digitalWrite(7, LOW); // apagamos el rojo
+  digitalWrite(9, HIGH); // encendemos el verde
+  delay(2000); // esperamos 2 segundos
+  digitalWrite(9, LOW);  // apagamos el verde
+}
