@@ -1,0 +1,40 @@
+// Ejercicio 4
+void setup() {
+pinMode(9,OUTPUT); // verde
+pinMode(8,OUTPUT); // azul
+pinMode(7,OUTPUT); // rojo
+
+digitalWrite(9, LOW);
+digitalWrite(8, LOW);
+digitalWrite(7, LOW);
+}
+
+void loop() {
+  // comenzamos con los 3 encendidos
+  digitalWrite(9,HIGH); // encendemos el verde
+  digitalWrite(8,HIGH); // encendemos el azul
+  digitalWrite(7,HIGH); // encendemos el rojo
+  delay(2000);
+  digitalWrite(9,LOW); // encendemos el verde
+  digitalWrite(8,LOW); // encendemos el azul
+  digitalWrite(7,LOW); // encendemos el rojo
+  
+  digitalWrite(9,HIGH); // encendemos el verde
+    delay(3000);  // esperamos 3 segundos
+  digitalWrite(9, LOW); // apagamos el verde
+    delay(300); // esperamos 0,3 segundos
+  digitalWrite(9,HIGH); // encendemos el verde
+    delay(300); // esperamos 0,3 segundo
+  digitalWrite(9, LOW); // apagamos el verde
+    delay(300); // esperamos 0,3 segundos
+  digitalWrite(9,HIGH); // encendemos el verde
+    delay(300); // esperamos 0,3 segundos
+  digitalWrite(9, LOW); // apagamos el verde
+    delay(300); // esperamos 0,3 segundos
+  digitalWrite(7,HIGH); // encendemos el rojo
+    delay(4000); // esperamos 4 segundos    
+  digitalWrite(7, LOW); // apagamos el rojo  
+  digitalWrite(8,HIGH); // encendemos el azul
+  delay(2000);  // esperamos 2 segundos  
+  digitalWrite(8, LOW); // apagamos el azul
+}
