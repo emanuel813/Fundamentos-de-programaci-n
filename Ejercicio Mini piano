@@ -1,0 +1,34 @@
+
+void setup() {
+ pinMode(8,OUTPUT); // le decimos a Arduino que usaremos el pin 8 como salida (para el del buzzer)
+ pinMode(9,INPUT);  // le decimos a Arduino que usaremos el pin 9 como entrada (para el botón)
+ pinMode(10,INPUT); // le decimos a Arduino que usaremos el pin 10 como entrada (para el botón)
+ pinMode(11,INPUT); // le decimos a Arduino que usaremos el pin 11 como entrada (para el botón)
+ pinMode(3,OUTPUT); // le decimos a Arduino que usaremos el pin 3 como salida (para el led)
+ noTone(8); // nos aseguramos que no haya ningún sonido en el buzzer
+ pinMode(3,LOW); // nos aseguramos que no encienda el led
+}
+void loop() {
+ // vamos a leer el estado del botón usando la función digitalRead
+ // y también usaremos una estructura de código llamada “if” o condicional
+ // pinMode(3,HIGH); 
+ // delay(100);        // esperamos 100 milisegundos para al precionar el botón
+ pinMode(3,LOW);
+ // delay(100); 
+ 
+if (digitalRead(9)==HIGH)  { // iniciar con el tono para encender el led, utilizando el mismo botón
+ pinMode(3,HIGH);
+ tone(8,294,500); // por lo tanto hay que reproducir el sonido por 300 milisegundos
+  }
+
+  if  (digitalRead(10)==HIGH) { // iniciar con el tono para encender el led, utilizando el mismo botón
+pinMode(3,HIGH);
+ tone(8,370,500);
+  }
+ 
+ if (digitalRead(11)==HIGH){ // Si en el pin 11 hay una señal HIGH es que se presionó el botón
+  pinMode(3,HIGH);
+ tone(8,784,500);
+   } 
+ 
+}
