@@ -1,0 +1,24 @@
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>     // LiquidCrystal_I2C() – Constructor de la clase, configura el hardware.
+
+                                   // scrollDisplayLeft() y scrollDisplayRight() – Recorre el contenido de la pantalla a la izquierda o a la derecha
+LiquidCrystal_I2C lcd(0x27,16,2);  // set the LCD address to 0x27 for a 16 chars and 2 line display
+
+void setup(){
+  
+  lcd.begin(16, 2);                   
+  lcd.init();
+  lcd.backlight();        // backlight() y noBacklight() – Métodos para encender / apagar la iluminación de fondo
+  lcd.setCursor(0,0);     // Permite mover el cursor a la posición indicada en sus parámetros.
+  lcd.print("Linea 1");  // print() – Imprime una variable o literal en la pantalla
+  lcd.backlight();        // backlight() y noBacklight() – Métodos para encender / apagar la iluminación de fondo
+  lcd.setCursor(0,1);     // Permite mover el cursor a la posición indicada en sus parámetros.
+  lcd.print("Linea 2");  // print() – Imprime una variable o literal en la pantalla
+  
+  
+}
+
+
+
+void loop(){
+}
