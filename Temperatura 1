@@ -1,0 +1,67 @@
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27,16,2);
+
+   float tempC;
+   int pinLM35 = A3;
+   
+   float maxi = 0;
+   float mini = 999;
+   const int BOTON = 3;
+   int val = 0; //val se emplea para almacenar el estado del boton
+   int state = 0; // 0 apagado, mientras que 1 encendido
+   int old_val = 0; // almacena el antiguo valor de val
+  
+void setup(){
+  pinMode(BOTON,INPUT); // y BOTON como señal de entrada
+  lcd.init();
+ lcd.backlight();
+ pinMode(A3,INPUT); // decimos al Arduino que usaremos el pin 3 como entrada (el del botón)
+ lcd.begin(16, 2); // se le indica al objeto lcd cuántas columnas y cuántas filas tiene nuestra pantalla
+ Serial.begin(9600);
+}
+
+
+void loop (){
+    val= digitalRead(BOTON); // lee el estado del Boton
+      if ((val == HIGH) && (old_val == LOW)){
+      state=1-state;
+        delay(10);
+}
+
+  tempC = analogRead(pinLM35); 
+  tempC = (5.0 * tempC * 100)/1023; 
+   
+   
+   if(tempC>maxi){
+      Serial.print("Max: ");
+      Serial.println(tempC,2);
+      maxi=tempC;
+  }
+   
+   if(tempC<mini){
+      Serial.print("Min: ");
+      Serial.println(tempC,2);
+     mini=tempC;
+   }
+   
+  lcd.setCursor(0,0);
+  lcd.print("Temp:");
+  lcd.setCursor(5,0);
+  lcd.print(tempC);
+  
+  old_val = val; // valor del antiguo estado
+if (state==1){
+ lcd.setCursor(0,1); 
+  lcd.print("Max:");
+  lcd.print(maxi);
+  
+}
+else{
+ lcd.setCursor(0,1);
+  lcd.print("Min:");
+  lcd.print(mini);
+  
+}
+}
+  
