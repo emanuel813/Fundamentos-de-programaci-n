@@ -1,0 +1,37 @@
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>   
+#define boton 3                     // se define el boton 3 como valor constante, tambien se puede implemetar como int cons boto = 3;
+
+LiquidCrystal_I2C lcd(0x27,16,2);   // llamamos la libreria para I2c
+                     
+int valor=0;                        // nombramos a la variable int (valor)
+int contador=0;                     // nombramos a la variable int (contador) donde se guardara las veces que precionamos el boton
+int estadoAnt=0;                    // nombramos a la variable int (estadoAnt) para recordar el ultimo valor
+
+void setup() {
+  
+ pinMode(boton,INPUT);              
+ digitalWrite(boton,HIGH);           
+ lcd.init();                        // inicializar la pantalla
+ lcd.backlight();                   // iluminación del fondo de la pantalla
+ lcd.begin(16, 2);                  // tamaño de la pantalla
+ lcd.setCursor(0,0);
+ lcd.print("Bienvenido!");
+ delay(1000);
+ lcd.clear();
+}
+
+void loop() {
+ 
+ valor=digitalRead(boton);           // la variable valor es = le salida digital del boton
+ if(valor!=estadoAnt){               // utilizamos ! para terminar un proceso (significa diferencia o desigualdad entre dos valores o variables)
+ if(valor==1){                       // para continuar el proceso 
+ contador++;                         // se le suma un 1 al numero actual        
+ lcd.setCursor(0,0);
+ lcd.print(contador);
+ lcd.print(":Contador");
+ }
+ }
+ estadoAnt=valor;                
+ 
+}
