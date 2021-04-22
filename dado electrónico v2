@@ -1,0 +1,23 @@
+int numero = 0;
+#define SENSOR 8
+void setup() {
+ for (int pin=2;pin<=8;pin++) {// desde que el pin valga 2 hasta que valga más que 7
+ pinMode(pin,OUTPUT);// ponemos a cada pin en modo salida
+ digitalWrite(pin,LOW);// y lo apagamos
+ }
+ pinMode(SENSOR,INPUT); // el pin del sensor tilt
+}
+void loop() {
+ if (digitalRead(SENSOR)==LOW){ // si el pin del sensor tilt está en low quiere decir que está en movimiento apagamos todos los leds
+ for (int pin=2;pin<=8;pin++) {// desde que el pin valga 2 hasta que valga más que 6
+  digitalWrite(pin,LOW);// lo apagamos
+ }
+ numero=random(1,8);// generamos un número aleatorio que va de 1 a 5
+ for (int pin=2;pin<=8;pin++) {// por cada pin
+ if (pin<=numero) {// verificamos si el pin es menor igual al número generado
+ // aleatoriamente
+ digitalWrite(pin,HIGH);// si es así prendemos el led
+ }
+ }
+ }
+}
