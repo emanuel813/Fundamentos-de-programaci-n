@@ -1,0 +1,50 @@
+int numero = 0;
+#define SENSOR 8
+
+void setup() {
+ // ponemos los pines en modo salida para todos los leds
+ pinMode(SENSOR, INPUT);
+ pinMode(2,OUTPUT);
+ pinMode(3,OUTPUT);
+ pinMode(4,OUTPUT);
+ pinMode(5,OUTPUT);
+ pinMode(6,OUTPUT);
+ pinMode(7,OUTPUT);
+ // apagamos todos los leds
+ digitalWrite(2,LOW);
+ digitalWrite(3,LOW);
+ digitalWrite(4,LOW);
+ digitalWrite(5,LOW);
+ digitalWrite(6,LOW);
+ digitalWrite(7,LOW); 
+}
+void loop() {
+if (digitalRead(SENSOR)==LOW) {// si el dado electrónico está en movimiento
+ numero=random(1,7);// si no generamos un número aleatorio de 2 a 6 (es decir puede que salga 2,3,4,5, o 6 apagamos todos los leds
+ digitalWrite(2,LOW);
+ digitalWrite(3,LOW);
+ digitalWrite(4,LOW);
+ digitalWrite(5,LOW);
+ digitalWrite(6,LOW);
+ digitalWrite(7,LOW);
+ // y prendemos solo los necesarios
+ if (numero>=1) { // si el número es uno o más prendemos el primer led
+ digitalWrite(2,HIGH);
+ }
+ if (numero>=2) { // si el número es dos o más prendemos el segundo led
+ digitalWrite(3,HIGH);
+ }
+ if (numero>=3) { // si el número es tres o más prendemos el tercer led
+ digitalWrite(4,HIGH);
+ }
+ if (numero>=4) { // si el número es cuatro o más prendemos el cuarto led
+ digitalWrite(5,HIGH);
+ }
+ if (numero>=5) { // si el número es cinco o más prendemos el quinto led
+ digitalWrite(6,HIGH);
+ }
+ if (numero>=6) { // si el número es  o más prendemos el quinto led
+ digitalWrite(7,HIGH);
+ }
+ }
+}
