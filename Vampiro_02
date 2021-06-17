@@ -1,0 +1,63 @@
+#include <Servo.h> //incluimos la librería Servo
+Servo myservo; // creamos un objeto que manejará al servo
+int luz = 0; // creamos una variable para indicar la luz que detecta el sensor
+int salud = 10000; // tiene 30 puntos de vida
+int luzQueMata = 850; // máxima luz que puede tolerar el vampiro
+int tiempoEnEsteLugar = 0;// cuenta hace cuánto que no se cambia el movimiento del servo
+int tiempoDeEspera = 5000; // el tiempo de espera máximo para un movimiento
+int puntos = 0;
+bool sono= false;
+void setup() {
+ pinMode(A0,INPUT); // usaremos el pin A0 en modo input
+ pinMode(7,OUTPUT);// usaremos el pin 7 para el buzzer
+ myservo.attach(8);// le decimos al servo qué pin usará
+ myservo.write(90); // escribimos la posicion 90° para que el servo apunte a su ángulo medio
+ // música de inicio del juego
+ tone(7,440);
+delay(300);
+ tone(7,540);
+ delay(300);
+ tone(7,640);
+ delay(200);
+tone(7,540);
+ delay(400);
+ noTone(7);
+ delay(300);
+}
+void vampiroVivo() {// esta es una función que creamos nosotros
+ if (tiempoEnEsteLugar > tiempoDeEspera) {// si ha estado en este lugar mucho tiempo
+ myservo.write(random(0,180)); // hace que el servo se mueva a un ángulo aleatorio
+ tiempoEnEsteLugar = 0; // reinicia el contador de tiempo
+ } else {// en caso contrario, si todavía no pasó el tiempo de espera
+ tiempoEnEsteLugar+=1;// acumula tiempo
+ }
+ if (luz > luzQueMata-50) { // si hay más luz que la que puede soportar el vampiro
+ // (más un margen de error)
+ salud-=1;// restamos salud
+ tone(7,50); // reproducimos un sonido para que el jugador sepa
+ } else {
+ noTone(7); // si no se le quita salud no reproducimos ningún sonido
+ }
+}
+void vampiroMuerto() {// esta es otra función que nosostros creamos
+ if (!sono) { // si no hizo la música
+tone(7,220);
+ delay(400);
+ tone(7,200);
+ delay(400);
+ tone(7,180);
+delay(400);
+ tone(7,100);
+ delay(800);
+ noTone(7);
+ sono = true; // ahora sí la hizo
+ }
+}
+void loop() {
+ luz = analogRead(A0); // leemos el pin A0 y almacenamos el valor en luz
+ if (salud>0) { // si el vampiro está vivo
+ vampiroVivo(); // ejecute la función vampiroVivo
+ } else {
+ vampiroMuerto(); // ejecute la función vampiroMuerto
+ }
+}
