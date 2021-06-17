@@ -1,0 +1,33 @@
+/*
+ * Vampiro3.ino
+ * descripcion: Este programa nos permitirá ver el recorrido que hace el servo, 
+ *              se moverá hacia el centro luego de ahí de derecha a izquierda,
+ *              dando un grado de 180.
+ * variables de entrada:
+ * variables intermedias: 
+ * variables de salida:
+ * 
+ * puertos: 
+ *        Servo motor: 5v
+ *                     GND
+ *                     Pin:8
+ *       
+ *        
+ * por motivos de emulacion la salud se pondra en 10
+ * 
+ * autor: Emanuel Celis Cano
+ * fecha: 17/06/2021
+ */
+#include <Servo.h> //incluimos la libreria Servo
+Servo myservo; // creamos un objeto que manejará al servo
+void setup() {
+ myservo.attach(8);// le decimos al servo qué pin usará
+ myservo.write(90); // escribimos la posición 90° para que el servo apunte a su ángulo medio
+ delay(1000); // esperamos 1 segundo
+}
+void loop() {
+ myservo.write(0);// ponemos en 0° ángulo
+ delay(1000); // esperamos 1 segundo
+ myservo.write(180); // ponemos en 180° el ángulo
+ delay(1000);// esperamos 1 segundo
+}
